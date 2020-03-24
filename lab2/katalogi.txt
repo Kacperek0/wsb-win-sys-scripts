@@ -1,0 +1,11 @@
+zwierzeta
+zwierzeta\koty
+zwierzeta\koty\dachowiec
+zwierzeta\koty\rasowe
+zwierzeta\koty\rasowe\brytyjski
+zwierzeta\koty\rasowe\perski
+zwierzeta\koty\rasowe\ragdoll
+zwierzeta\koty\rasowe\syjamski
+zwierzeta\psy
+zwierzeta\psy\jamnik
+zwierzeta\psy\labrador
