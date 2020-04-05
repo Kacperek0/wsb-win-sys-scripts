@@ -1,0 +1,120 @@
+Ćwiczenie 2:
+Napisać skrypt (kopia.bat), który:
+a) stworzy w katalogu ćwiczeń podkatalog kopia, np. d:\sysop\kopia. Jeśli katalog już istnieje - skrypt najpierw usunie go wraz z zawartością
+b) skopiuje wszystkie pliki z podkatalogu download do stworzonego katalogu kopia
+
+Wynikiem ćwiczenia powinno być następujące drzewo :
+D:.
+|   katalogi.txt
+|   winlab.zip
+|
++---download
+|       brytyjski.jpg
+|       dachowiec.jpg
+|       jamnik.jpg
+|       labrador.jpg
+|       perski.jpg
+|       ragdoll.jpg
+|       syjamski.jpg
+|
++---kopia
+|       brytyjski.jpg
+|       dachowiec.jpg
+|       jamnik.jpg
+|       labrador.jpg
+|       perski.jpg
+|       ragdoll.jpg
+|       syjamski.jpg
+|
+\---zwierzeta
+    +---koty
+    |   +---dachowiec
+    |   \---rasowe
+    |       +---brytyjski
+    |       +---perski
+    |       +---ragdoll
+    |       \---syjamski
+    \---psy
+        +---jamnik
+        \---labrador
+
+*** Podpowiedzi: ***
+	1. Do pobrania nazw plików proszę wykorzystać pętlę :
+	for /f %%f in ('dir /s /b .\download') do ...
+
+Ćwiczenie 3:
+Napisać skrypt (dopasuj.bat), który:
+a) ze wskazanego parametrem pierwszym katalogu przeniesie wszystkie pliki do katalogu wskazanego parametrem drugim o ile znajdzie odpowiedni podkatalog. Odpowiedni podkatalog to taki, którego nazwa jest taka sama jak nazwa przenoszonego pliku, np.
+jeśli system znajdzie plik o nazwie labrador.jpg to będzie poszukiwał podkatalogu o nazwie labrador - dopiero gdy taki znajdzie - wykona przeniesienie.
+
+b) skrypt powinien sprawdzać poprawność parametrów - istnienia katalogów wskazanych przy jego uruchamianiu.
+
+Uruchomienie skryptu:
+dopasuj.bat .\download .\zwierzeta
+
+Powinno dać w efekcie następujące drzewo (tree /a /f .\zwierzeta)
+
++---koty
+|   +---dachowiec
+|   |       dachowiec.jpg
+|   |
+|   \---rasowe
+|       +---brytyjski
+|       |       brytyjski.jpg
+|       |
+|       +---perski
+|       |       perski.jpg
+|       |
+|       +---ragdoll
+|       |       ragdoll.jpg
+|       |
+|       \---syjamski
+|               syjamski.jpg
+|
+\---psy
+    +---jamnik
+    |       jamnik.jpg
+    |
+    \---labrador
+            labrador.jpg
+
+
+Katalog download powinien być pusty
+
+*** Podpowiedzi: ***
+	1. Aby wykonać zadanie, należy zastosować pętle zagnieżdzone. Pętla zewnętrzna będzie iterowała po plikach znajdujących się w katalogu okreśonego parametrem %1, natomiast pętla wewnętrzna będzie iterowała po podkatalogach katalogu określonego parametrem %2
+
+	for /f %%f in ('dir /S /B %1\*.*') do (
+		for /f %%k in ('dir /A:D /S /B %2') do (
+		)
+	)
+
+	W powyższym fragmencie kodu zmienna %%f w każdym kroku będzie zawierała kolejną nazwę pliku z listy plików w katalogu wskazanym parametrem %1. Zmienna %%k będzie zawierała kolejną nazwę podkatalogu w katalogu wkazanym parametrem %2.
+
+	Proszę spróbować wykonać z poziomu powłoki tekstowej poniższe instrukcje (w katalogu ćwiczeń)
+	dir /S /B .\*.*
+	dir /A:D /S /B .\*.*
+
+	i przeanalizować ich wynik
+
+	2. Jeśli zmienna ,np. %%k posiada wartość, która jest pełną ścieżką pliku, np. D:\sysop\download\labrador.jpg a my chcieli byśmy pobrać tylko nazwę pliku (bez rozszerzenia), możemy skorzystać z opcji formatującej ~n, np.
+
+	@echo off
+	for /f %%f in ('dir /S /B .\download\*.*') do (
+		echo Pelna sciezka %%f
+		echo Nazwa pliku %%~nf
+	)
+
+	Proszę zapisać powyższy przykładowy skrypt w katalogu ćwiczeń i uruchomić go z powłoki tekstowej.
+	Podobny warian zadziała dla nazw katalogów:
+
+	@echo off
+	for /f %%k in ('dir /A:D /S /B .\zwierzeta') do (
+		echo Pelna sciezka %%k
+		echo Nazwa katalogu %%~nk
+	)
+
+	3. Jeśli zmienna %%f zawiera nazwę pliku ze ścieżką, np. D:\sysop\download\labrador.jpg, a zmienna %%k zawiera ścieżkę do podkatalogu, np. d:\sysop\zwierzeta\psy\labrador to aby sprawdzić czy nazwy są takie same wykonamy następującą instrukcję:
+
+	if "%%~nf" == "%%~nk" ...
+
