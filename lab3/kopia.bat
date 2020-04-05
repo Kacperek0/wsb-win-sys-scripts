@@ -3,7 +3,6 @@
     REM check if directory exists, remove it and create again
     if exist "kopia" (
         rmdir /q /s "kopia"
-        mkdir "kopia"
     )
 
     REM delete existing downloads file
@@ -22,6 +21,7 @@
     rmdir /q /s "winlab"
 
     REM move files from download folder to kopia
+    mkdir "kopia"
     for /f %%f in ('dir /s /b .\download') do (
         copy %%f .\kopia
     )
