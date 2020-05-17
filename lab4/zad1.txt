@@ -1,0 +1,12 @@
+sudo groupadd sysop
+sudo useradd sysop01 -G sysop
+sudo passwd sysop01
+    type password: 'test'
+    retype password: 'test'
+su sysop01
+    password: 'test'
+whoami
+    sysop01
+groups
+    sysop01 sysop
+

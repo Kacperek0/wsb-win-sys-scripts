@@ -1,0 +1,32 @@
+su sysop01
+    $ Password: 'test'
+cd /tmp
+wget http://corecontrol.cba.pl/linuxlab.tar
+tar xvf linuxlab.tar
+chmod o-rwx linuxlab
+chmod g-rwx linuxlab
+su -
+    $ Password: ***
+sudo groupadd sysop2
+sudo useradd sysop02 -G sysop02
+    $ Type Password: 'test'
+    $ Retype Password: 'test'
+su sysop02
+    $ Password: 'test'
+vi /tmp/linuxlab/teksty
+    $ "/tmp/linuxlab/teksty" [Permission Denied]
+    $ :q
+su sysop01
+    $ Password: 'test'
+chmod g+rx /tmp/linuxlab/teksty
+su -
+    $ Password: ***
+sudo usermod -g sysop01 sysop02
+su sysop02
+    $ Password: 'test'
+cd /tmp/linuxlab/teksty
+ls
+    $ tekst_a.txt tekst_b.txt tekst_c.txt
+rm -rf tekst_a.txt tekst_b.txt tekst_c.txt
+ls
+    $
