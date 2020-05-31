@@ -6,10 +6,14 @@ read first
 echo "Input second number: "
 read second
 
-if [ $first -eq $second ]; then
-    echo "$first equals $second"
-elif [ $first -lt $second ]; then
-    echo "$first is lower than $second"
-elif [ $first -gt $second ]; then
-    echo "$first is higher than $second"
-fi
+function compare {
+    if [ $1 -eq $2 ]; then
+        echo "$1 equals $2"
+    elif [ $1 -lt $2 ]; then
+        echo "$1 is lower than $2"
+    elif [ $1 -gt $2 ]; then
+        echo "$1 is higher than $2"
+    fi
+}
+
+compare $first $second
