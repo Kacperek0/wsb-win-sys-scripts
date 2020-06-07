@@ -1,0 +1,25 @@
+Please select [1, 2, 0]: 2
+Home catalog: /root
+Memory info:
+-----------------------------------------
+              total        used        free      shared  buff/cache   available
+Mem:        3500956      191968     2880060        4980      428928     3018316
+Swap:             0           0           0
+-----------------------------------------
+Total disk space
+-----------------------------------------
+Filesystem     1K-blocks    Used Available Use% Mounted on
+udev             1740528       0   1740528   0% /dev
+tmpfs             350096    4956    345140   2% /run
+/dev/sda1       30309352 1719716  28573252   6% /
+tmpfs            1750476       0   1750476   0% /dev/shm
+tmpfs               5120       0      5120   0% /run/lock
+tmpfs            1750476       0   1750476   0% /sys/fs/cgroup
+/dev/sda15        106858    3686    103172   4% /boot/efi
+tmpfs             350096       0    350096   0% /run/user/1000
+-----------------------------------------
+Home catalog space:
+334M	/home/kacper
+16K	/home/test2
+16K	/home/test3
+Press any key to continue
